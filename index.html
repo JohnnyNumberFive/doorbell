@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Doorbell Client</title>
+    
+    <link rel="stylesheet" href="css/style.min.css">
+
+    <script src="js/pusher.min.js"></script>
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+
+    <div class="top-bar">
+        <div id="welcomeMessage"></div>
+        <button class="gear-btn" onclick="toggleSettingsModal()">⚙</button>
+    </div>
+
+    <div class="buttons-container" id="buttonsContainer"></div>
+
+    <div class="statusbar">
+        <div id="statusDot" class="status-dot"></div>
+        <span id="connectionStatus">Подключение...</span>
+    </div>
+
+    <div id="settingsModal" class="modal-overlay hidden">
+        <div class="header-container">
+            <div class="uuid-row">
+                <span>Ваш УИД</span>
+                <div class="uuid-value" id="deviceIdDisplay" onclick="copyUuidToClipboard()" title="Нажмите, чтобы скопировать">Загрузка...</div>
+            </div>
+            <div class="action-links">
+                <button class="settings-btn" onclick="copyUuidToClipboard()">📋 Скопировать УИД</button>
+                <button class="settings-btn" onclick="openEditView()">✏️ Изменить УИД вручную</button>
+                <button class="settings-btn settings-btn-primary" style="margin-top: 8px;" onclick="toggleSettingsModal()">Закрыть настройки</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="editModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3>Редактирование УИД</h3>
+            <input type="text" id="idInput" placeholder="Введите новый UUID">
+            <div class="modal-actions">
+                <button class="settings-btn" onclick="closeEditView()">Отмена</button>
+                <button class="settings-btn settings-btn-primary" onclick="saveNewId()">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then((reg) => console.log('[PWA] Service Worker успешно зарегистрирован:', reg.scope))
+                    .catch((err) => console.error('[PWA] Ошибка регистрации Service Worker:', err));
+            });
+        }
+    </script>
+</body>
+</html>
