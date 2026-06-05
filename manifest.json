@@ -23,7 +23,7 @@
   "screenshots": [
     {
       "src": "screenshot-mobile.png",
-      "sizes": "390x844",
+      "sizes": "390x390",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Мобильная версия приложения"

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'doorbell-pwa-cache-v1';
+const CACHE_NAME = 'doorbell-pwa-cache-v2';
 
 // Список локальных файлов интерфейса, которые телефон сохранит в свою память
 const ASSETS_TO_CACHE = [
