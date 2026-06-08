@@ -1,40 +1,35 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <title>Doorbell Client</title>
     
-    <!-- Подключаем наш внешний файл стилей -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Официальный JS-клиент Pusher актуальной версии 8.4.0 -->
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+
     <script src="js/pusher.min.js"></script>
 
-    <!-- Подключаем файл манифеста PWA -->
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
 
-    <!-- Шапка приложения: Приветствие и Настройки -->
     <div class="top-bar">
         <div id="welcomeMessage"></div>
         <button class="gear-btn" onclick="toggleSettingsModal()">⚙</button>
     </div>
 
-    <!-- Основные динамические кнопки управления -->
-    <div class="buttons-container" id="buttonsContainer">
-        <!-- Кнопки сгенерируются автоматически после ответа C# приложения -->
-    </div>
+    <div class="buttons-container" id="buttonsContainer"></div>
 
-    <!-- Статусбар внизу экрана -->
     <div class="statusbar">
         <div id="statusDot" class="status-dot"></div>
         <span id="connectionStatus">Подключение...</span>
     </div>
 
-    <!-- ОКНО НАСТРОЕК (Вызывается шестерёнкой) -->
     <div id="settingsModal" class="modal-overlay hidden">
         <div class="header-container">
             <div class="uuid-row">
@@ -49,7 +44,6 @@
         </div>
     </div>
 
-    <!-- МОДАЛКА РЕДАКТИРОВАНИЯ УИД -->
     <div id="editModal" class="modal-overlay hidden">
         <div class="modal-card">
             <h3>Редактирование УИД</h3>
@@ -61,14 +55,13 @@
         </div>
     </div>
 
-    <!-- Логика приложения из папки js/ -->
     <script src="js/app.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then((reg) => console.log('[PWA] Service Worker успешно зарегистрирован:', reg.scope))
-                    .catch((err) => console.error('[PWA] Ошибка регистрации Service Worker:', err));
+                navigator.serviceWorker.register('js/sw.js')
+                    .then((reg) => {})
+                    .catch((err) => {});
             });
         }
     </script>
